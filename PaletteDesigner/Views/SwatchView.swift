@@ -52,7 +52,7 @@ struct SwatchView: View {
             if let resolvedColor = resolvedColor {
                 
                 let adjustedColor = Color(
-                    hue: resolvedColor.hsba.hue / 360.0,
+                    hue: (resolvedColor.hsba.hue + (swatch.hueAdjustment ?? 0.0)) / 360.0,
                     saturation: (resolvedColor.hsba.saturation + (swatch.saturationAdjustment ?? 0.0)) / 100.0,
                     brightness: (resolvedColor.hsba.brightness + (swatch.brightnessAdjustment ?? 0.0)) / 100.0,
                     opacity: resolvedColor.hsba.alpha / 100.0
@@ -61,7 +61,6 @@ struct SwatchView: View {
                 Rectangle()
                     .frame(width: 200, height: 100)
                     .foregroundStyle(adjustedColor)
-                    .hueRotation(.degrees(swatch.hueAdjustment ?? 0.0))
                     .overlay {
                         VStack {
                             
