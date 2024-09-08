@@ -11,7 +11,8 @@ import SwiftUI
 // Formula to convert from RGB to HSB obtained here:
 // https://www.30secondsofcode.org/js/s/rgb-hex-hsl-hsb-color-format-conversion/
 //
-// ChatGPT used to convert Javascript function to a Swift function.
+// ChatGPT used to convert Javascript function to a Swift function:
+// https://chatgpt.com/share/0e075380-02c8-43fb-a543-f6c8a8117fcf
 // Some modifications were then made to make this a computed property that includes an alpha (opacity) value.
 //
 
