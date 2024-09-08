@@ -25,11 +25,15 @@ struct SwatchView: View {
             .foregroundStyle(color)
             .overlay {
                 VStack {
-                    Text(color.hexRepresentation)
-                        .foregroundStyle(Color.white)
                     
                     if let resolvedColor {
                         Grid {
+                            GridRow {
+                                Text(resolvedColor.shortHex)
+                                    .foregroundStyle(Color.white)
+                                    .gridCellColumns(4)
+                            }
+                            
                             GridRow {
                                 Text("R:")
                                 Text("\(resolvedColor.red)")
@@ -74,5 +78,5 @@ struct SwatchView: View {
 }
 
 #Preview {
-    SwatchView(color: Color.red)
+    SwatchView(color: Color.black)
 }

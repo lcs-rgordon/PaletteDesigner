@@ -56,3 +56,11 @@ extension Color.Resolved {
     }
     
 }
+
+extension Color.Resolved {
+
+    var shortHex: String {
+        return String(self.description.dropLast(2))
+    }
+
+}
