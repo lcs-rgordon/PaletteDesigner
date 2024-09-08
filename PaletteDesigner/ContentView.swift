@@ -40,9 +40,7 @@ struct ContentView: View {
                 
                 VStack(spacing: 0) {
                     ForEach(providedColors, id: \.self) { currentColor in
-                        Rectangle()
-                            .frame(width: 200, height: 100)
-                            .foregroundStyle(currentColor)
+                        SwatchView(color: currentColor)
                     }
                 }
                 
