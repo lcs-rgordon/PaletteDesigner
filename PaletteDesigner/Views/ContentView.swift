@@ -28,7 +28,7 @@ struct ContentView: View {
                 
                 TextField("Type a color in hexadecimal:", text: $providedColorInHex)
                 
-                SwatchView(color: providedColor)
+                SwatchView(colorInHex: providedColorInHex)
                 
                 Button {
                     providedColors.append(providedColor)
@@ -38,7 +38,7 @@ struct ContentView: View {
                 
                 VStack(spacing: 0) {
                     ForEach(providedColors, id: \.self) { currentColor in
-                        SwatchView(color: currentColor)
+                        SwatchView(colorInHex: currentColor.description.cleanedHex)
                     }
                 }
                 
