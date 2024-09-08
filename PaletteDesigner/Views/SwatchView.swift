@@ -84,7 +84,10 @@ struct SwatchView: View {
                 .foregroundColor(Color.white)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                 .overlay {
-                    Text("Invalid color provided")
+                    VStack {
+                        Text("Invalid color provided")
+                        Text("Provided value was: \(colorInHex)")
+                    }
                 }
         }
         

@@ -12,7 +12,7 @@ struct ContentView: View {
     
     // MARK: Stored properties
     @State private var providedColorInHex: String = "AFAFAF"
-    @State private var providedColors: [Color] = []
+    @State private var providedColors: [String] = []
 
     // MARK: Computed properties
     var providedColor: Color {
@@ -31,14 +31,14 @@ struct ContentView: View {
                 SwatchView(colorInHex: providedColorInHex)
                 
                 Button {
-                    providedColors.append(providedColor)
+                    providedColors.append(providedColorInHex)
                 } label: {
                     Text("Add")
                 }
                 
                 VStack(spacing: 0) {
                     ForEach(providedColors, id: \.self) { currentColor in
-                        SwatchView(colorInHex: currentColor.description.cleanedHex)
+                        SwatchView(colorInHex: currentColor)
                     }
                 }
                 
