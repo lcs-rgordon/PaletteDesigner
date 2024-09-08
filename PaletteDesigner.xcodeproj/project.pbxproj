@@ -13,6 +13,7 @@
 		81C9AE632C8DDE1000DA8DCC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C9AE622C8DDE1000DA8DCC /* Preview Assets.xcassets */; };
 		81C9AE6C2C8DDE3200DA8DCC /* NVMColor in Frameworks */ = {isa = PBXBuildFile; productRef = 81C9AE6B2C8DDE3200DA8DCC /* NVMColor */; };
 		81C9AE6E2C8DE2D800DA8DCC /* SwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9AE6D2C8DE2D800DA8DCC /* SwatchView.swift */; };
+		81C9AE722C8DE36E00DA8DCC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9AE712C8DE36E00DA8DCC /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		81C9AE622C8DDE1000DA8DCC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		81C9AE642C8DDE1000DA8DCC /* PaletteDesigner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PaletteDesigner.entitlements; sourceTree = "<group>"; };
 		81C9AE6D2C8DE2D800DA8DCC /* SwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwatchView.swift; sourceTree = "<group>"; };
+		81C9AE712C8DE36E00DA8DCC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				81C9AE5B2C8DDE0F00DA8DCC /* PaletteDesignerApp.swift */,
-				81C9AE6D2C8DE2D800DA8DCC /* SwatchView.swift */,
-				81C9AE5D2C8DDE0F00DA8DCC /* ContentView.swift */,
+				81C9AE702C8DE36000DA8DCC /* Extensions */,
+				81C9AE6F2C8DE35600DA8DCC /* Views */,
 				81C9AE5F2C8DDE1000DA8DCC /* Assets.xcassets */,
 				81C9AE642C8DDE1000DA8DCC /* PaletteDesigner.entitlements */,
 				81C9AE612C8DDE1000DA8DCC /* Preview Content */,
@@ -72,6 +74,23 @@
 				81C9AE622C8DDE1000DA8DCC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		81C9AE6F2C8DE35600DA8DCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81C9AE6D2C8DE2D800DA8DCC /* SwatchView.swift */,
+				81C9AE5D2C8DDE0F00DA8DCC /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		81C9AE702C8DE36000DA8DCC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				81C9AE712C8DE36E00DA8DCC /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81C9AE5E2C8DDE0F00DA8DCC /* ContentView.swift in Sources */,
+				81C9AE722C8DE36E00DA8DCC /* Color.swift in Sources */,
 				81C9AE5C2C8DDE0F00DA8DCC /* PaletteDesignerApp.swift in Sources */,
 				81C9AE6E2C8DE2D800DA8DCC /* SwatchView.swift in Sources */,
 			);

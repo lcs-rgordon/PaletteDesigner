@@ -28,9 +28,7 @@ struct ContentView: View {
                 
                 TextField("Type a color in hexadecimal:", text: $providedColorInHex)
                 
-                Rectangle()
-                    .frame(width: 200, height: 100)
-                    .foregroundStyle(providedColor)
+                SwatchView(color: providedColor)
                 
                 Button {
                     providedColors.append(providedColor)
