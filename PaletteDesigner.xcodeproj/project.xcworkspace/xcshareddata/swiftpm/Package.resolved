@@ -1,0 +1,15 @@
+{
+  "originHash" : "9ceb27039bece123843b439b5362016379aa9decf982a1f308b258db650513b7",
+  "pins" : [
+    {
+      "identity" : "nvmcolor_swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/NVMNovem/NVMColor_swift",
+      "state" : {
+        "revision" : "80cf6140a29a88197f9bee51918843d706dc6034",
+        "version" : "1.2.5"
+      }
+    }
+  ],
+  "version" : 3
+}
