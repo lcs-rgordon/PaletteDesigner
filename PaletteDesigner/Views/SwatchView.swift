@@ -13,7 +13,7 @@ struct SwatchView: View {
     let swatch: Swatch
     @Environment(\.self) var environment
     @State private var resolvedColor: Color.Resolved?
-    
+
     // MARK: Computed properties
     var foregroundColor: Color {
         return .black
@@ -21,6 +21,24 @@ struct SwatchView: View {
     
     var providedColor: Color? {
         return Color(hex: swatch.colorInHex)
+    }
+    
+    var adjustedColorInHex: String? {
+        if let resolvedColor = resolvedColor,
+           let hueAdjustment = swatch.hueAdjustment {
+            
+            let adjustedColor = Color(
+                hue: (resolvedColor.hsba.hue + hueAdjustment) / 360.0,
+                saturation: resolvedColor.hsba.saturation / 100.0,
+                brightness: resolvedColor.hsba.brightness / 100.0,
+                opacity: resolvedColor.hsba.alpha / 100.0
+            )
+            
+            return adjustedColor.resolve(in: environment).shortHex
+
+        } else {
+            return nil
+        }
     }
     
     var body: some View {
@@ -37,7 +55,7 @@ struct SwatchView: View {
                         if let resolvedColor {
                             Grid {
                                 GridRow {
-                                    Text(resolvedColor.shortHex)
+                                    Text(swatch.hueAdjustment == nil ? resolvedColor.shortHex : adjustedColorInHex ?? "huh?")
                                         .gridCellColumns(4)
                                 }
                                 
@@ -99,6 +117,10 @@ struct SwatchView: View {
             resolvedColor = providedColor.resolve(in: environment)
         }
     }
+}
+
+#Preview {
+    ContentView()
 }
 
 #Preview {
