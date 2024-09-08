@@ -29,15 +29,37 @@ struct SwatchView: View {
                         .foregroundStyle(Color.white)
                     
                     if let resolvedColor {
-                        Text("R: \(resolvedColor.red)")
-                            .foregroundStyle(Color.white)
-                        Text("G: \(resolvedColor.green)")
-                            .foregroundStyle(Color.white)
-                        Text("B: \(resolvedColor.blue)")
-                            .foregroundStyle(Color.white)
-                        Text("O: \(resolvedColor.opacity)")
-                            .foregroundStyle(Color.white)
+                        Grid {
+                            GridRow {
+                                Text("R:")
+                                Text("\(resolvedColor.red)")
+                                
+                                Text("H:")
+                                Text("\(resolvedColor.hsba.hue)")
+                            }
+                            GridRow {
+                                Text("G:")
+                                Text("\(resolvedColor.green)")
 
+                                Text("S:")
+                                Text("\(resolvedColor.hsba.saturation)")
+                            }
+                            GridRow {
+                                Text("B:")
+                                Text("\(resolvedColor.blue)")
+
+                                Text("B:")
+                                Text("\(resolvedColor.hsba.brightness)")
+                            }
+                            GridRow {
+                                Text("A:")
+                                Text("\(resolvedColor.opacity)")
+
+                                Text("A:")
+                                Text("\(resolvedColor.hsba.alpha)")
+                            }
+                        }
+                        .foregroundStyle(Color.white)
                     }
                 }
             }
