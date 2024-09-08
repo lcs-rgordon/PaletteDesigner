@@ -10,7 +10,7 @@ import SwiftUI
 struct SwatchView: View {
     
     // MARK: Stored properties
-    let colorInHex: String
+    let swatch: Swatch
     @Environment(\.self) var environment
     @State private var resolvedColor: Color.Resolved?
     
@@ -20,7 +20,7 @@ struct SwatchView: View {
     }
     
     var providedColor: Color? {
-        return Color(hex: colorInHex)
+        return Color(hex: swatch.colorInHex)
     }
     
     var body: some View {
@@ -82,11 +82,11 @@ struct SwatchView: View {
             Rectangle()
                 .frame(width: 200, height: 100)
                 .foregroundColor(Color.white)
-                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                .border(Color.black, width: 1)
                 .overlay {
                     VStack {
                         Text("Invalid color provided")
-                        Text("Provided value was: \(colorInHex)")
+                        Text("Provided value was: \(swatch.colorInHex)")
                     }
                 }
         }
@@ -102,8 +102,8 @@ struct SwatchView: View {
 
 #Preview {
     VStack {
-        SwatchView(colorInHex: "000000")
-        SwatchView(colorInHex: "FF")
+        SwatchView(swatch: Swatch(colorInHex: "000000"))
+        SwatchView(swatch: Swatch(colorInHex: "FF"))
     }
 }
 

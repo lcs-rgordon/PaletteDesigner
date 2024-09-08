@@ -12,7 +12,7 @@ struct ContentView: View {
     
     // MARK: Stored properties
     @State private var providedColorInHex: String = "AFAFAF"
-    @State private var providedColors: [String] = []
+    @State private var providedColors: [Swatch] = []
 
     // MARK: Computed properties
     var providedColor: Color {
@@ -28,17 +28,22 @@ struct ContentView: View {
                 
                 TextField("Type a color in hexadecimal:", text: $providedColorInHex)
                 
-                SwatchView(colorInHex: providedColorInHex)
+                SwatchView(
+                    swatch: Swatch(
+                        colorInHex: providedColorInHex
+                    )
+                )
                 
                 Button {
-                    providedColors.append(providedColorInHex)
+                    let newSwatch = Swatch(colorInHex: providedColorInHex)
+                    providedColors.append(newSwatch)
                 } label: {
                     Text("Add")
                 }
                 
                 VStack(spacing: 0) {
                     ForEach(providedColors, id: \.self) { currentColor in
-                        SwatchView(colorInHex: currentColor)
+                        SwatchView(swatch: currentColor)
                     }
                 }
                 
