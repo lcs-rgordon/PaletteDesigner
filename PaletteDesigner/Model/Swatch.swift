@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Swatch: Hashable {
+struct Swatch: Identifiable, Hashable {
+    let id = UUID()
     let colorInHex: String
     var hueAdjustment: Double? = nil
     var saturationAdjustment: Double? = nil

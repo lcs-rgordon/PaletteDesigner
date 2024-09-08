@@ -42,7 +42,7 @@ struct ContentView: View {
                 }
                 
                 VStack(spacing: 0) {
-                    ForEach(providedColors, id: \.self) { currentColor in
+                    ForEach(providedColors) { currentColor in
                         SwatchComparisonView(givenColor: currentColor)
                     }
                 }
