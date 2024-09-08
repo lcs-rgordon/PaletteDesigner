@@ -37,7 +37,6 @@ struct SwatchView: View {
                             Grid {
                                 GridRow {
                                     Text(resolvedColor.shortHex)
-                                        .foregroundStyle(Color.white)
                                         .gridCellColumns(4)
                                 }
                                 
@@ -70,7 +69,8 @@ struct SwatchView: View {
                                     Text("\(resolvedColor.hsba.alpha)")
                                 }
                             }
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(resolvedColor.hsba.brightness > 50 ? Color.black : Color.white)
+
                         }
                     }
                 }
