@@ -30,6 +30,7 @@ struct SwatchView: View {
             Rectangle()
                 .frame(width: 200, height: 100)
                 .foregroundStyle(providedColor)
+                .hueRotation(.degrees(swatch.hueAdjustment ?? 0.0))
                 .overlay {
                     VStack {
                         
@@ -45,7 +46,7 @@ struct SwatchView: View {
                                     Text("\(resolvedColor.red)")
                                     
                                     Text("H:")
-                                    Text("\(resolvedColor.hsba.hue)")
+                                    Text("\(swatch.hueAdjustment == nil ? resolvedColor.hsba.hue : resolvedColor.hsba.hue + swatch.hueAdjustment!)")
                                 }
                                 GridRow {
                                     Text("G:")
@@ -81,7 +82,7 @@ struct SwatchView: View {
         } else {
             Rectangle()
                 .frame(width: 200, height: 100)
-                .foregroundColor(Color.white)
+                .foregroundStyle(Color.white)
                 .border(Color.black, width: 1)
                 .overlay {
                     VStack {

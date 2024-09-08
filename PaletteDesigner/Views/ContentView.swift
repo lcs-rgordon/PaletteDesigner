@@ -43,7 +43,15 @@ struct ContentView: View {
                 
                 VStack(spacing: 0) {
                     ForEach(providedColors, id: \.self) { currentColor in
-                        SwatchView(swatch: currentColor)
+                        HStack {
+                            SwatchView(swatch: currentColor)
+                            SwatchView(
+                                swatch: Swatch(
+                                    colorInHex: currentColor.colorInHex,
+                                    hueAdjustment: 180
+                                )
+                            )
+                        }
                     }
                 }
                 
