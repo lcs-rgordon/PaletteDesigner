@@ -26,12 +26,13 @@ struct SwatchView: View {
     var adjustedColorInHex: String? {
         if let resolvedColor = resolvedColor,
            let hueAdjustment = swatch.hueAdjustment,
-           let saturationAdjustment = swatch.saturationAdjustment {
+           let saturationAdjustment = swatch.saturationAdjustment,
+           let brightnessAdjustment = swatch.brightnessAdjustment {
             
             let adjustedColor = Color(
                 hue: (resolvedColor.hsba.hue + hueAdjustment) / 360.0,
                 saturation: (resolvedColor.hsba.saturation + saturationAdjustment) / 100.0,
-                brightness: resolvedColor.hsba.brightness / 100.0,
+                brightness: (resolvedColor.hsba.brightness + brightnessAdjustment) / 100.0,
                 opacity: resolvedColor.hsba.alpha / 100.0
             )
             
@@ -45,13 +46,15 @@ struct SwatchView: View {
     var body: some View {
         
         Group {
-            if let providedColor = providedColor,
-               let resolvedColor = resolvedColor {
+            
+            let _ = print("Body re-computed")
+            
+            if let resolvedColor = resolvedColor {
                 
                 let adjustedColor = Color(
                     hue: resolvedColor.hsba.hue / 360.0,
                     saturation: (resolvedColor.hsba.saturation + (swatch.saturationAdjustment ?? 0.0)) / 100.0,
-                    brightness: resolvedColor.hsba.brightness / 100.0,
+                    brightness: (resolvedColor.hsba.brightness + (swatch.brightnessAdjustment ?? 0.0)) / 100.0,
                     opacity: resolvedColor.hsba.alpha / 100.0
                 )
                 
@@ -61,7 +64,7 @@ struct SwatchView: View {
                     .hueRotation(.degrees(swatch.hueAdjustment ?? 0.0))
                     .overlay {
                         VStack {
-
+                            
                             Grid {
                                 GridRow {
                                     Text(swatch.hueAdjustment == nil ? resolvedColor.shortHex : adjustedColorInHex ?? "huh?")
@@ -73,27 +76,27 @@ struct SwatchView: View {
                                     Text("\(resolvedColor.red)")
                                     
                                     Text("H:")
-                                    Text("\(swatch.hueAdjustment == nil ? resolvedColor.hsba.hue : resolvedColor.hsba.hue + swatch.hueAdjustment!)")
+                                    Text("\(adjustedHue(resolvedColor))")
                                 }
                                 GridRow {
                                     Text("G:")
                                     Text("\(resolvedColor.green)")
-
+                                    
                                     Text("S:")
-                                    Text("\(swatch.saturationAdjustment == nil ? resolvedColor.hsba.saturation : resolvedColor.hsba.saturation + swatch.saturationAdjustment!)")
-
+                                    Text("\(adjustedSaturation(resolvedColor))")
+                                    
                                 }
                                 GridRow {
                                     Text("B:")
                                     Text("\(resolvedColor.blue)")
-
+                                    
                                     Text("B:")
-                                    Text("\(resolvedColor.hsba.brightness)")
+                                    Text("\(adjustedBrightness(resolvedColor))")
                                 }
                                 GridRow {
                                     Text("A:")
                                     Text("\(resolvedColor.opacity)")
-
+                                    
                                     Text("A:")
                                     Text("\(resolvedColor.hsba.alpha)")
                                 }
@@ -113,8 +116,12 @@ struct SwatchView: View {
                             Text("Provided value was: \(swatch.colorInHex)")
                         }
                     }
-            }        }
+            }
+        }
         .onAppear {
+            getColor()
+        }
+        .onChange(of: swatch) { old, new in
             getColor()
         }
 
@@ -125,6 +132,18 @@ struct SwatchView: View {
         if let providedColor = providedColor {
             resolvedColor = providedColor.resolve(in: environment)
         }
+    }
+    
+    func adjustedHue(_ resolvedColor: Color.Resolved) -> Double {
+        swatch.hueAdjustment == nil ? resolvedColor.hsba.hue : resolvedColor.hsba.hue + swatch.hueAdjustment!
+    }
+    
+    func adjustedSaturation(_ resolvedColor: Color.Resolved) -> Double {
+        swatch.saturationAdjustment == nil ? resolvedColor.hsba.saturation : resolvedColor.hsba.saturation + swatch.saturationAdjustment!
+    }
+    
+    func adjustedBrightness(_ resolvedColor: Color.Resolved) -> Double {
+        swatch.brightnessAdjustment == nil ? resolvedColor.hsba.brightness : resolvedColor.hsba.brightness + swatch.brightnessAdjustment!
     }
 }
 
