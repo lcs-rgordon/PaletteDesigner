@@ -10,21 +10,33 @@ import SwiftUI
 struct SwatchComparisonView: View {
     
     let givenColor: Swatch
-    @State private var adjustmentFactor = 0.0
-    
+    @State private var saturationAdjustmentFactor = 0.0
+    @State private var hueAdjustmentFactor = 0.0
+
     var body: some View {
         HStack {
             SwatchView(swatch: givenColor)
-            Stepper(value: $adjustmentFactor,
-                step: 0.5,
-                format: .number.precision(.fractionLength(1)),
-                    label: {
-                Text("Adjust hue by:")
-            })
+            VStack(alignment: .trailing) {
+                Text("Adjustments")
+                    .bold()
+                Stepper(value: $saturationAdjustmentFactor,
+                    step: 0.5,
+                    format: .number.precision(.fractionLength(1)),
+                        label: {
+                    Text("Saturation:")
+                })
+                Stepper(value: $hueAdjustmentFactor,
+                    step: 0.5,
+                    format: .number.precision(.fractionLength(1)),
+                        label: {
+                    Text("Hue")
+                })
+            }
             SwatchView(
                 swatch: Swatch(
                     colorInHex: givenColor.colorInHex,
-                    hueAdjustment: adjustmentFactor
+                    hueAdjustment: hueAdjustmentFactor,
+                    saturationAdjustment: saturationAdjustmentFactor
                 )
             )
         }
@@ -32,5 +44,5 @@ struct SwatchComparisonView: View {
 }
 
 #Preview {
-    SwatchComparisonView(givenColor: Swatch(colorInHex: "FFA557"))
+    SwatchComparisonView(givenColor: Swatch(colorInHex: "284b63"))
 }

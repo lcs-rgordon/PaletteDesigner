@@ -25,11 +25,12 @@ struct SwatchView: View {
     
     var adjustedColorInHex: String? {
         if let resolvedColor = resolvedColor,
-           let hueAdjustment = swatch.hueAdjustment {
+           let hueAdjustment = swatch.hueAdjustment,
+           let saturationAdjustment = swatch.saturationAdjustment {
             
             let adjustedColor = Color(
                 hue: (resolvedColor.hsba.hue + hueAdjustment) / 360.0,
-                saturation: resolvedColor.hsba.saturation / 100.0,
+                saturation: (resolvedColor.hsba.saturation + saturationAdjustment) / 100.0,
                 brightness: resolvedColor.hsba.brightness / 100.0,
                 opacity: resolvedColor.hsba.alpha / 100.0
             )
@@ -43,16 +44,24 @@ struct SwatchView: View {
     
     var body: some View {
         
-        if let providedColor = providedColor {
-            
-            Rectangle()
-                .frame(width: 200, height: 100)
-                .foregroundStyle(providedColor)
-                .hueRotation(.degrees(swatch.hueAdjustment ?? 0.0))
-                .overlay {
-                    VStack {
-                        
-                        if let resolvedColor {
+        Group {
+            if let providedColor = providedColor,
+               let resolvedColor = resolvedColor {
+                
+                let adjustedColor = Color(
+                    hue: resolvedColor.hsba.hue / 360.0,
+                    saturation: (resolvedColor.hsba.saturation + (swatch.saturationAdjustment ?? 0.0)) / 100.0,
+                    brightness: resolvedColor.hsba.brightness / 100.0,
+                    opacity: resolvedColor.hsba.alpha / 100.0
+                )
+                
+                Rectangle()
+                    .frame(width: 200, height: 100)
+                    .foregroundStyle(adjustedColor)
+                    .hueRotation(.degrees(swatch.hueAdjustment ?? 0.0))
+                    .overlay {
+                        VStack {
+
                             Grid {
                                 GridRow {
                                     Text(swatch.hueAdjustment == nil ? resolvedColor.shortHex : adjustedColorInHex ?? "huh?")
@@ -71,7 +80,8 @@ struct SwatchView: View {
                                     Text("\(resolvedColor.green)")
 
                                     Text("S:")
-                                    Text("\(resolvedColor.hsba.saturation)")
+                                    Text("\(swatch.saturationAdjustment == nil ? resolvedColor.hsba.saturation : resolvedColor.hsba.saturation + swatch.saturationAdjustment!)")
+
                                 }
                                 GridRow {
                                     Text("B:")
@@ -89,26 +99,25 @@ struct SwatchView: View {
                                 }
                             }
                             .foregroundStyle(resolvedColor.hsba.brightness > 50 ? Color.black : Color.white)
-
                         }
                     }
-                }
-                .onAppear {
-                    getColor()
-                }
-            
-        } else {
-            Rectangle()
-                .frame(width: 200, height: 100)
-                .foregroundStyle(Color.white)
-                .border(Color.black, width: 1)
-                .overlay {
-                    VStack {
-                        Text("Invalid color provided")
-                        Text("Provided value was: \(swatch.colorInHex)")
+                
+            } else {
+                Rectangle()
+                    .frame(width: 200, height: 100)
+                    .foregroundStyle(Color.white)
+                    .border(Color.black, width: 1)
+                    .overlay {
+                        VStack {
+                            Text("Invalid color provided")
+                            Text("Provided value was: \(swatch.colorInHex)")
+                        }
                     }
-                }
+            }        }
+        .onAppear {
+            getColor()
         }
+
         
     }
     
@@ -125,7 +134,7 @@ struct SwatchView: View {
 
 #Preview {
     VStack {
-        SwatchView(swatch: Swatch(colorInHex: "000000"))
+        SwatchView(swatch: Swatch(colorInHex: "284b63", saturationAdjustment: 20.0))
         SwatchView(swatch: Swatch(colorInHex: "FF"))
     }
 }

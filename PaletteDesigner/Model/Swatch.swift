@@ -10,4 +10,5 @@ import Foundation
 struct Swatch: Hashable {
     let colorInHex: String
     var hueAdjustment: Double? = nil
+    var saturationAdjustment: Double? = nil
 }

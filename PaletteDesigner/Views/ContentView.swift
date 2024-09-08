@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     
     // MARK: Stored properties
-    @State private var providedColorInHex: String = "AFAFAF"
+    @State private var providedColorInHex: String = "284b63"
     @State private var providedColors: [Swatch] = []
 
     // MARK: Computed properties
